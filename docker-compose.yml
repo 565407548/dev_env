@@ -1,0 +1,109 @@
+version: '2'
+services:
+#  zoo1:
+#      image: zookeeper:3.4.11
+#      restart: always
+#      hostname: zoo1
+#      container_name: zoo1
+#      ports:
+#        - "2181:2181"
+#      environment:
+#        ZOO_MY_ID: 1
+#        ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+#  zoo2:
+#    image: zookeeper:3.4.11
+#    restart: always
+#    hostname: zoo2
+#    container_name: zoo2
+#    ports:
+#      - "2182:2181"
+#    environment:
+#      ZOO_MY_ID: 2
+#      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+#  zoo3:
+#    image: zookeeper:3.4.11
+#    restart: always
+#    hostname: zoo3
+#    container_name: zoo3
+#    ports:
+#      - "2183:2181"
+#    environment:
+#      ZOO_MY_ID: 3
+#      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    ports:
+      - 3307:3306
+    volumes:
+      - /mydata/mysql/data:/var/lib/mysql
+      - /mydata/mysql/conf:/etc/mysql
+      - /mydata/mysql/log:/var/log/mysql
+#      - ./mysql/config/my.cnf:/etc/my.cnf
+      - ./mysql/init:/docker-entrypoint-initdb.d/
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=test
+      - MYSQL_PASS=test
+
+
+#  elasticsearch:
+#    image: zhengcj01/elasticsearch-with-ik-pinyin:6.6.1
+#    container_name: elasticsearch
+#    environment:
+#      - name=elasticsearch
+#      - cluster.name=docker-es-cluster
+#      - bootstrap.memory_lock=true
+#      - http.cors.enabled=true
+#      - http.cors.allow-origin=*
+#      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    volumes:
+#      # image contains plugins(ik, pinyin), so comment this plugins mount config
+##      - /usr/share/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+#      - /usr/share/elasticsearch/data:/usr/share/elasticsearch/data
+#    ports:
+#      - 9200:9200
+#      - 9300:9300
+#    networks:
+#      - webservice_web-service
+#
+#  kibana:
+#    image: kibana:6.6.1
+##    environment:
+##      SERVER_NAME: kibana
+##      ELASTICSEARCH_URL: http://127.0.0.1:9200
+#    ports:
+#      - "5601:5601"
+#    networks:
+#      - webservice_web-service
+
+#  redis:
+#    image: redis:3.2
+#    ports:
+#      - 6379:6379
+#    volumes:
+#      - /mydata/redis/data:/data
+#    command: redis-server --appendonly yes
+#  mongo:
+#    image: mongo:3.2
+#    ports:
+#      - 27017:27017
+#    volumes:
+#      - /mydata/mongo/db:/data/db
+#  nginx:
+#    image: nginx:1.10
+#    ports:
+#      - 80:80
+#    volumes:
+#      - /mydata/nginx/html:/usr/share/nginx/html
+#      - /mydata/nginx/logs:/var/log/nginx
+#      - /mydata/nginx/conf:/etc/nginx
+networks:
+  webservice_web-service:
+    external: true
