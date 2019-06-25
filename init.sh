@@ -19,8 +19,10 @@ sudo mkdir -p /docker/elasticsearch/es2/data /docker/elasticsearch/es2/data/node
 sudo chmod -R g+rwx /docker/elasticsearch
 sudo chgrp 1000 /docker/elasticsearch
 
-
-
+# nginx
+# sudo mkdir -p /docker/nginx
+# sudo cp -r ./nginx /docker/nginx
+# sudo chmod -R g+rwx /docker/nginx/html
 
 
 

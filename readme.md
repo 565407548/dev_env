@@ -31,3 +31,29 @@ docker exec -it zoo3 /bin/bash
 zkServer.sh status
 ```
 
+# redis
+```
+docker exec -it redis /bin/bash
+redis-cli
+
+# redis 127.0.0.1:6379> keys *
+# redis 127.0.0.1:6379> set name "zhengcj"
+# redis 127.0.0.1:6379> get name
+
+```
+
+# nginx
+```
+http://localhost:80/
+```
+
+
+
+
+
+
+
+
+
+
+
