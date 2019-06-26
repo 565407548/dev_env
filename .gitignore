@@ -1,0 +1,27 @@
+# zookeeper
+zookeeper/zoo1/
+zookeeper/zoo2/
+zookeeper/zoo3/
+
+
+# mysql
+mysql/data/
+mysql/log/
+
+
+# elasticsearch
+elasticsearch/es1/data
+elasticsearch/es1/plugins
+
+elasticsearch/es2/data
+elasticsearch/es2/plugins
+
+
+# mongo db
+mongo/data/db
+
+# nginx
+nginx/logs
+
+
+

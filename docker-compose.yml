@@ -1,151 +1,168 @@
 version: '3'
 services:
-#  zoo1:
-#      image: zookeeper:3.4.11
-#      restart: always
-#      hostname: zoo1
-#      container_name: zoo1
-#      ports:
-#        - "2181:2181"
-#      volumes:
-#        - "/docker/zookeeper/zoo1/data:/data"
-#        - "/docker/zookeeper/zoo1/datalog:/datalog"
-#      environment:
-#        ZOO_MY_ID: 1
-#        ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
-#
-#  zoo2:
-#    image: zookeeper:3.4.11
-#    restart: always
-#    hostname: zoo2
-#    container_name: zoo2
-#    ports:
-#      - "2182:2181"
-#    volumes:
-#      - "/docker/zookeeper/zoo2/data:/data"
-#      - "/docker/zookeeper/zoo2/datalog:/datalog"
-#    environment:
-#      ZOO_MY_ID: 2
-#      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
-#  zoo3:
-#    image: zookeeper:3.4.11
-#    restart: always
-#    hostname: zoo3
-#    container_name: zoo3
-#    ports:
-#      - "2183:2181"
-#    volumes:
-#      - "/docker/zookeeper/zoo3/data:/data"
-#      - "/docker/zookeeper/zoo3/datalog:/datalog"
-#    environment:
-#      ZOO_MY_ID: 3
-#      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
-#
-#  mysql:
-#    image: mysql:5.7
-#    container_name: mysql
-#    restart: always
-#    ports:
-#      - 3307:3306
-#    volumes:
-#      - "/docker/mysql/data:/var/lib/mysql"
-#      - "/docker/mysql/conf:/etc/mysql"
-#      - "/docker/mysql/log:/var/log/mysql"
-#      - "/docker/mysql/config/my.cnf:/etc/my.cnf"
-#      - "/docker/mysql/init/create:/docker-entrypoint-initdb.d/:ro"
-#      - "/docker/mysql/init/start:/tmp/mysql/init"
-#    environment:
-#      MYSQL_ROOT_PASSWORD: "root"
-##      MYSQL_USER: "test"
-##      MYSQL_PASSWORD: "test"
-#    command: mysqld --init-file="/tmp/mysql/init/init.sql"
-##    network_mode: "host"
-#
-#  elasticsearch:
-#    image: zhengcj01/elasticsearch-with-ik-pinyin:6.6.1
-#    container_name: elasticsearch
-#    environment:
-#      - cluster.name=docker-es-cluster
-#      - node.name=elasticsearch_master
-#      - node.master=true
-#      - node.data=true
-#      - bootstrap.memory_lock=true
-#      - http.cors.enabled=true
-#      - http.cors.allow-origin=*
-#      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    volumes:
-#      # image contains plugins(ik, pinyin), so comment this plugins mount config
-##      - /docker/elasticsearch/es1/plugins:/usr/share/elasticsearch/plugins
-#      - /docker/elasticsearch/es1/data:/usr/share/elasticsearch/data
-#    ports:
-#      - 9200:9200
-#      - 9300:9300
-#    networks:
-#      - webservice_web-service
-#
-#  elasticsearch2:
-#    image: zhengcj01/elasticsearch-with-ik-pinyin:6.6.1
-#    container_name: elasticsearch2
-#    environment:
-#      - cluster.name=docker-es-cluster
-#      - node.name=elasticsearch_slave
-#      - node.master=false
-#      - node.data=true
-#      - bootstrap.memory_lock=true
-#      - http.cors.enabled=true
-#      - http.cors.allow-origin=*
-#      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-#      - "discovery.zen.ping.unicast.hosts=elasticsearch"
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    volumes:
-#      # image contains plugins(ik, pinyin), so comment this plugins mount config
-#      #      - /docker/elasticsearch/es2/plugins:/usr/share/elasticsearch/plugins
-#      - /docker/elasticsearch/es2/data:/usr/share/elasticsearch/data
-#    ports:
-#      - 9220:9200
-#      - 9320:9300
-#    networks:
-#      - webservice_web-service
-#    depends_on:
-#      - elasticsearch
-#
-#  kibana:
-#    image: kibana:6.6.1
-#    container_name: kibana
-##    environment:
-##      SERVER_NAME: kibana
-##      ELASTICSEARCH_URL: http://127.0.0.1:9200
-#    ports:
-#      - "5601:5601"
-#    networks:
-#      - webservice_web-service
-#    depends_on:
-#      - elasticsearch
-#    external_links:
-#      - elasticsearch
-#
-#  redis:
-#    image: redis
-#    container_name: redis
-#    ports:
-#      - 6379:6379
-#    volumes:
-#      - redis:/data
-#    command: redis-server --appendonly yes
+  zoo1:
+      image: zookeeper:3.4.11
+      restart: always
+      hostname: zoo1
+      container_name: zoo1
+      ports:
+        - "2181:2181"
+      volumes:
+        - "./zookeeper/zoo1/data:/data"
+        - "./zookeeper/zoo1/datalog:/datalog"
+      environment:
+        ZOO_MY_ID: 1
+        ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
 
-##  mongo:
-##    image: mongo:3.2
-##    ports:
-##      - 27017:27017
-##    volumes:
-##      - /docker/mongo/db:/data/db
+  zoo2:
+    image: zookeeper:3.4.11
+    restart: always
+    hostname: zoo2
+    container_name: zoo2
+    ports:
+      - "2182:2181"
+    volumes:
+      - "./zookeeper/zoo2/data:/data"
+      - "./zookeeper/zoo2/datalog:/datalog"
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+  zoo3:
+    image: zookeeper:3.4.11
+    restart: always
+    hostname: zoo3
+    container_name: zoo3
+    ports:
+      - "2183:2181"
+    volumes:
+      - "./zookeeper/zoo3/data:/data"
+      - "./zookeeper/zoo3/datalog:/datalog"
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    ports:
+      - 3307:3306
+    volumes:
+      - "./mysql/data:/var/lib/mysql"
+      - "./mysql/conf:/etc/mysql"
+      - "./mysql/log:/var/log/mysql"
+      - "./mysql/init/create:/docker-entrypoint-initdb.d/:ro"
+      - "./mysql/init/start:/tmp/mysql/init"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+#      MYSQL_USER: "test"
+#      MYSQL_PASSWORD: "test"
+    command: mysqld --init-file="/tmp/mysql/init/init.sql"
+#    network_mode: "host"
+
+
+  elasticsearch:
+    image: zhengcj01/elasticsearch-with-ik-pinyin:6.6.1
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-es-cluster
+      - node.name=elasticsearch_master
+      - node.master=true
+      - node.data=true
+      - bootstrap.memory_lock=true
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      # image contains plugins(ik, pinyin), so comment this plugins mount config
+#      - ./elasticsearch/es1/plugins:/usr/share/elasticsearch/plugins
+      - ./elasticsearch/es1/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - webservice_web-service
+
+  elasticsearch2:
+    image: zhengcj01/elasticsearch-with-ik-pinyin:6.6.1
+    container_name: elasticsearch2
+    environment:
+      - cluster.name=docker-es-cluster
+      - node.name=elasticsearch_slave
+      - node.master=false
+      - node.data=true
+      - bootstrap.memory_lock=true
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      # image contains plugins(ik, pinyin), so comment this plugins mount config
+      #      - ./elasticsearch/es2/plugins:/usr/share/elasticsearch/plugins
+      - ./elasticsearch/es2/data:/usr/share/elasticsearch/data
+    ports:
+      - 9220:9200
+      - 9320:9300
+    networks:
+      - webservice_web-service
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: kibana:6.6.1
+    container_name: kibana
+#    environment:
+#      SERVER_NAME: kibana
+#      ELASTICSEARCH_URL: http://127.0.0.1:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - webservice_web-service
+    depends_on:
+      - elasticsearch
+    external_links:
+      - elasticsearch
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+    command: redis-server --appendonly yes
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - "./mongo/data/db:/data/db"
+      - "./mongo/setup:/docker-entrypoint-initdb.d/:ro"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+
+  # 如果不需要MongoDB的网页端，以下内容可以不加
+  mongo-express:  # 会自动从Docker Hub上自动获取mongo-express这个镜像
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:  #这里只能使用与上方MONGO_INITDB_ROOT_USERNAME相同的root账号
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
 
   nginx:
     image: nginx
@@ -156,42 +173,42 @@ services:
     volumes:
       - ./nginx/html:/usr/share/nginx/html
       - ./nginx/logs:/var/log/nginx
-#      - /docker/nginx/conf:/etc/nginx
-#
-#  rabbitmq1:
-#    image: "rabbitmq"
-#    container_name: rabbitmq1
-#    environment:
-#      - RABBITMQ_ERLANG_COOKIE='secret_cookie'
-#    networks:
-#      - back
-#    hostname: rabbitmq1
-#    ports:
-#      - "15672:15672"
-#      - "5672:5672"
-#    tty: true
-#    volumes:
-#      - rabbitmq1:/var/lib/rabbitmq
-#      - ./rabbitmq/conf/:/etc/rabbitmq/
-#    command:  bash -c "sleep 10; rabbitmq-server;"
-#  rabbitmq2:
-#    image: "rabbitmq"
-#    container_name: rabbitmq2
-#    environment:
-#      - RABBITMQ_ERLANG_COOKIE='secret_cookie'
-#    networks:
-#      - back
-#    hostname: rabbitmq2
-#    depends_on:
-#      - rabbitmq1
-#    ports:
-#      - "15673:15672"
-#      - "5673:5672"
-#    tty: true
-#    volumes:
-#      - rabbitmq2:/var/lib/rabbitmq
-#      - ./rabbitmq/conf/:/etc/rabbitmq/
-#    command:  bash -c "sleep 10; rabbitmq-server;"
+#      - ./nginx/conf:/etc/nginx
+
+  rabbitmq1:
+    image: "rabbitmq"
+    container_name: rabbitmq1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE='secret_cookie'
+    networks:
+      - back
+    hostname: rabbitmq1
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    tty: true
+    volumes:
+      - rabbitmq1:/var/lib/rabbitmq
+      - ./rabbitmq/conf/:/etc/rabbitmq/
+    command:  bash -c "sleep 10; rabbitmq-server;"
+  rabbitmq2:
+    image: "rabbitmq"
+    container_name: rabbitmq2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE='secret_cookie'
+    networks:
+      - back
+    hostname: rabbitmq2
+    depends_on:
+      - rabbitmq1
+    ports:
+      - "15673:15672"
+      - "5673:5672"
+    tty: true
+    volumes:
+      - rabbitmq2:/var/lib/rabbitmq
+      - ./rabbitmq/conf/:/etc/rabbitmq/
+    command:  bash -c "sleep 10; rabbitmq-server;"
 volumes:
   rabbitmq1:
     driver: local # docker volume create --driver local --name rabbitmq1
