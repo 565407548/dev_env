@@ -47,8 +47,18 @@ redis-cli
 http://localhost:80/
 ```
 
+# mongo
+```
+http://localhost:8081/
 
-
+mongo -u zhengcj -p 123456 --host localhost --authenticationDatabase newDB
+> show dbs;
+> show databases;
+> use newDB;
+> show collections;
+```
++ [see more](https://blog.csdn.net/u011104991/article/details/81735960)
++ [runoob mongo](https://www.runoob.com/mongodb/)
 
 
 
