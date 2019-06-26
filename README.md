@@ -7,12 +7,14 @@ docker-compose down -v
 ```
 
 # mysql 
-+ 第一次创建mysql执行文件目录：`/docker/mysql/init/create`。判断是否有效的方法：清空 `/docker/mysql` 下相关数据，执行 docker-compose up
-+ 每次启动都执行的文件目录：`/docker/mysql/init/start`
++ 第一次创建mysql执行文件目录：`./mysql/init/create`。判断是否有效的方法：清空 `./mysql/data` 下相关数据，执行 docker-compose up
++ 每次启动都执行的文件目录：`./mysql/init/start`
  
 ```
 docker exec -it mysql /bin/bash
-
+```
+# elasticsearch && kibana
+```
 #打开 http://localhost:5601, 通过如下命令查看集群情况：
 GET _cluster/health
 GET _cat/nodes
