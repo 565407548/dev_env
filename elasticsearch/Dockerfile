@@ -8,11 +8,11 @@ FROM elasticsearch:7.2.0
 MAINTAINER zhengcj01 <565407548@qq.com>
 
 ENV ES_BASE_PATH /opt
-ENV ES_TMP_PATH /opt/es
+ENV ES_TMP_PATH $ES_BASE_PATH/es
 
 ENV ES_PLUGINS_PATH /usr/share/elasticsearch/plugins
-ENV ES_PLUGINS_IK_PATH /usr/share/elasticsearch/plugins/ik
-ENV ES_PLUGINS_PINYIN_PATH /usr/share/elasticsearch/plugins/pinyin
+ENV ES_PLUGINS_IK_PATH $ES_PLUGINS_PATH/ik
+ENV ES_PLUGINS_PINYIN_PATH $ES_PLUGINS_PATH/pinyin
 
 RUN cd $ES_BASE_PATH && \
 yum -y install wget && \

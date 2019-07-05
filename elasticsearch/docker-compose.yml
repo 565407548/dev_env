@@ -9,6 +9,7 @@ services:
       - -Dhosts.0.host=http://elasticsearch:9200
     networks:
       - es7_net
+
   kibana:
     image: kibana:7.2.0
     container_name: kibana7
@@ -21,6 +22,15 @@ services:
       - "5601:5601"
     networks:
       - es7_net
+
+  logstash:
+    image: logstash:7.2.0
+    container_name: logstash7
+    volumes:
+      - ./logstash/test:/usr/share/logstash/test
+    networks:
+      - es7_net
+
   elasticsearch:
     image: zhengcj01/elasticsearch-with-ik-pinyin:7.2.0
     container_name: es7_01
@@ -36,11 +46,12 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - es7_01_data:/usr/share/elasticsearch/data
+      - ./es1/data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
       - es7_net
+
   elasticsearch2:
     image: zhengcj01/elasticsearch-with-ik-pinyin:7.2.0
     container_name: es7_02
@@ -56,10 +67,9 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - es7_02_data:/usr/share/elasticsearch/data
+      - ./es2/data:/usr/share/elasticsearch/data
     networks:
       - es7_net
-
 
 volumes:
   es7_01_data:
