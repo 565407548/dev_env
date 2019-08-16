@@ -1,0 +1,85 @@
+version: '2.2'
+services:
+  elasticsearch:
+    image: zhengcj01/elasticsearch-with-ik-pinyin:6.6.1
+    container_name: es6_01
+    environment:
+      - cluster.name=docker_es6_cluster
+      - node.name=es6_01
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+#      - discovery.seed_hosts=es6_01 # for 7.x
+#      - cluster.initial_master_nodes=es6_01,es6_02 # for 7.x
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./es1/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - es6_net
+
+  elasticsearch2:
+    image: zhengcj01/elasticsearch-with-ik-pinyin:6.6.1
+    container_name: es6_02
+    environment:
+      - cluster.name=docker_es6_cluster
+      - node.name=es6_02
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx51m"
+#      - discovery.seed_hosts=es6_01 # for 7.x
+#      - cluster.initial_master_nodes=es6_01,es6_02 # for 7.x
+      - "discovery.zen.ping.unicast.hosts=es6_01"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./es2/data:/usr/share/elasticsearch/data
+    networks:
+      - es6_net
+
+
+#  cerebro:
+#    image: lmenezes/cerebro:0.8.3
+#    container_name: cerebro6
+#    ports:
+#      - "9000:9000"
+#    command:
+#      - -Dhosts.0.host=http://elasticsearch:9200
+#    networks:
+#      - es6_net
+
+  kibana:
+    image: kibana:6.6.1
+    container_name: kibana6
+    environment:
+      - I18N_LOCALE=zh-CN
+      - XPACK_GRAPH_ENABLED=true
+      - TIMELION_ENABLED=true
+      - XPACK_MONITORING_COLLECTION_ENABLED="true"
+      - elasticsearch.requestTimeout = 40000
+    ports:
+      - "5601:5601"
+    networks:
+      - es6_net
+
+#  logstash:
+#    image: logstash:6.6.1
+#    container_name: logstash6
+#    volumes:
+#      - ./logstash/test:/usr/share/logstash/test
+#    networks:
+#      - es6_net
+
+volumes:
+  es6_01_data:
+    driver: local
+  es6_02_data:
+    driver: local
+
+networks:
+  es6_net:
+    driver: bridge

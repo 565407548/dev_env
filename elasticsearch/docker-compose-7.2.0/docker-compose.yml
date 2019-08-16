@@ -1,36 +1,5 @@
 version: '2.2'
 services:
-  cerebro:
-    image: lmenezes/cerebro:0.8.3
-    container_name: cerebro
-    ports:
-      - "9000:9000"
-    command:
-      - -Dhosts.0.host=http://elasticsearch:9200
-    networks:
-      - es7_net
-
-  kibana:
-    image: kibana:7.2.0
-    container_name: kibana7
-    environment:
-      - I18N_LOCALE=zh-CN
-      - XPACK_GRAPH_ENABLED=true
-      - TIMELION_ENABLED=true
-      - XPACK_MONITORING_COLLECTION_ENABLED="true"
-    ports:
-      - "5601:5601"
-    networks:
-      - es7_net
-
-  logstash:
-    image: logstash:7.2.0
-    container_name: logstash7
-    volumes:
-      - ./logstash/test:/usr/share/logstash/test
-    networks:
-      - es7_net
-
   elasticsearch:
     image: zhengcj01/elasticsearch-with-ik-pinyin:7.2.0
     container_name: es7_01
@@ -70,6 +39,39 @@ services:
       - ./es2/data:/usr/share/elasticsearch/data
     networks:
       - es7_net
+
+
+#  cerebro:
+#    image: lmenezes/cerebro:0.8.3
+#    container_name: cerebro
+#    ports:
+#      - "9000:9000"
+#    command:
+#      - -Dhosts.0.host=http://elasticsearch:9200
+#    networks:
+#      - es7_net
+
+  kibana:
+    image: kibana:7.2.0
+    container_name: kibana7
+    environment:
+      - I18N_LOCALE=zh-CN
+      - XPACK_GRAPH_ENABLED=true
+      - TIMELION_ENABLED=true
+      - XPACK_MONITORING_COLLECTION_ENABLED="true"
+      - elasticsearch.requestTimeout = 40000
+    ports:
+      - "5601:5601"
+    networks:
+      - es7_net
+
+#  logstash:
+#    image: logstash:7.2.0
+#    container_name: logstash7
+#    volumes:
+#      - ./logstash/test:/usr/share/logstash/test
+#    networks:
+#      - es7_net
 
 volumes:
   es7_01_data:

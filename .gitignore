@@ -10,11 +10,20 @@ mysql/log/
 
 
 # elasticsearch
-elasticsearch/es1/data
-elasticsearch/es1/plugins
+elasticsearch/docker-compose-7.2.0/es1/data
+elasticsearch/docker-compose-7.2.0/es1/plugins
+elasticsearch/docker-compose-7.2.0/es2/data
+elasticsearch/docker-compose-7.2.0/es2/plugins
+elasticsearch/docker-compose-7.2.0/logstash
 
-elasticsearch/es2/data
-elasticsearch/es2/plugins
+
+
+elasticsearch/docker-compose-6.6.1/es1/data
+elasticsearch/docker-compose-6.6.1/es1/plugins
+elasticsearch/docker-compose-6.6.1/es2/data
+elasticsearch/docker-compose-6.6.1/es2/plugins
+elasticsearch/docker-compose-6.6.1/logstash
+
 
 
 # mongo db
