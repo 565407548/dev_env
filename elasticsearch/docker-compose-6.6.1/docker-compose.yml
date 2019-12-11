@@ -42,15 +42,15 @@ services:
       - es6_net
 
 
-#  cerebro:
-#    image: lmenezes/cerebro:0.8.3
-#    container_name: cerebro6
-#    ports:
-#      - "9000:9000"
-#    command:
-#      - -Dhosts.0.host=http://elasticsearch:9200
-#    networks:
-#      - es6_net
+  cerebro:
+    image: lmenezes/cerebro:0.8.3
+    container_name: cerebro6
+    ports:
+      - "9000:9000"
+    command:
+      - -Dhosts.0.host=http://elasticsearch:9200
+    networks:
+      - es6_net
 
   kibana:
     image: kibana:6.6.1
