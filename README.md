@@ -1,73 +1,23 @@
-build dev env by docker-compose
+# Dev evn
 
-# docker-compose
+## steps
+### install Ubuntu
+### [about ssh key](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 ```
-docker-compose up
-docker-compose down -v
-```
+# example
+# ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+# for me
+ssh-keygen -t rsa -b 4096 -C "565407548@qq.com"
 
-# mysql 
-+ 第一次创建mysql执行文件目录：`./mysql/init/create`。判断是否有效的方法：清空 `./mysql/data` 下相关数据，执行 docker-compose up
-+ 每次启动都执行的文件目录：`./mysql/init/start`
- 
-```
-docker exec -it mysql /bin/bash
-```
-# elasticsearch && kibana
-```
-#打开 http://localhost:5601, 通过如下命令查看集群情况：
-GET _cluster/health
-GET _cat/nodes
-```
-
-# zookeeper 相关命令
-```
-docker exec -it zoo1 /bin/bash
-# in zoo1
-zkServer.sh status
-
-docker exec -it zoo2 /bin/bash
-# in zoo2
-zkServer.sh status
-
-docker exec -it zoo3 /bin/bash
-# in zoo3
-zkServer.sh status
-```
-
-# redis
-```
-docker exec -it redis /bin/bash
-redis-cli
-
-# redis 127.0.0.1:6379> keys *
-# redis 127.0.0.1:6379> set name "zhengcj"
-# redis 127.0.0.1:6379> get name
+cat ~/.ssh/id_rsa.pub
+echo "copy the content of ~/.ssh/id_rsa.pub to "
 
 ```
-
-# nginx
+### [cp ssh key to github](https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
 ```
-http://localhost:80/
+cat ~/.ssh/id_rsa.pub
+echo "copy the content of ~/.ssh/id_rsa.pub to https://github.com/settings/keys"
 ```
-
-# mongo
-```
-http://localhost:8081/
-
-mongo -u zhengcj -p 123456 --host localhost --authenticationDatabase newDB
-> show dbs;
-> show databases;
-> use newDB;
-> show collections;
-```
-+ [see more](https://blog.csdn.net/u011104991/article/details/81735960)
-+ [runoob mongo](https://www.runoob.com/mongodb/)
-
-
-
-
-
-
-
-
+### sh 0.pull\_dev\_evn.sh
+### sh 1.repos.sh
+### then exec x... by self

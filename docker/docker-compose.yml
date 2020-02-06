@@ -1,0 +1,110 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - "./mysql/data:/var/lib/mysql"
+      - "./mysql/conf:/etc/mysql"
+      - "./mysql/log:/var/log/mysql"
+      - "./mysql/init/create:/docker-entrypoint-initdb.d/:ro"
+      - "./mysql/init/start:/tmp/mysql/init"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+#      MYSQL_USER: "test"
+#      MYSQL_PASSWORD: "test"
+    command: mysqld --init-file="/tmp/mysql/init/init.sql"
+#    network_mode: "host"
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+    command: redis-server --appendonly yes
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - "./mongo/data/db:/data/db"
+      - "./mongo/setup:/docker-entrypoint-initdb.d/:ro"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+
+  # 如果不需要MongoDB的网页端，以下内容可以不加
+  mongo-express:  # 会自动从Docker Hub上自动获取mongo-express这个镜像
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:  #这里只能使用与上方MONGO_INITDB_ROOT_USERNAME相同的root账号
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/logs:/var/log/nginx
+#      - ./nginx/conf:/etc/nginx
+
+  rabbitmq1:
+    image: "rabbitmq"
+    container_name: rabbitmq1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE='secret_cookie'
+    networks:
+      - back
+    hostname: rabbitmq1
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    tty: true
+    volumes:
+      - rabbitmq1:/var/lib/rabbitmq
+      - ./rabbitmq/conf/:/etc/rabbitmq/
+    command:  bash -c "sleep 10; rabbitmq-server;"
+  rabbitmq2:
+    image: "rabbitmq"
+    container_name: rabbitmq2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE='secret_cookie'
+    networks:
+      - back
+    hostname: rabbitmq2
+    depends_on:
+      - rabbitmq1
+    ports:
+      - "15673:15672"
+      - "5673:5672"
+    tty: true
+    volumes:
+      - rabbitmq2:/var/lib/rabbitmq
+      - ./rabbitmq/conf/:/etc/rabbitmq/
+    command:  bash -c "sleep 10; rabbitmq-server;"
+volumes:
+  rabbitmq1:
+    driver: local # docker volume create --driver local --name rabbitmq1
+  rabbitmq2:
+    driver: local
+  redis:
+    driver: local
+   
+networks:
+  webservice_web-service:
+    external: true
+  back:
