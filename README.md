@@ -1,4 +1,4 @@
-# Dev evn
+# Dev env
 
 ## steps
 ### install Ubuntu
