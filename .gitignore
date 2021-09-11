@@ -2,11 +2,12 @@
 zookeeper/zoo1/
 zookeeper/zoo2/
 zookeeper/zoo3/
-
+zookeeper/instance
+docker/zookeeper/instance
 
 # mysql
-mysql/data/
-mysql/log/
+mysql/instance
+docker/mysql/instance
 
 
 # elasticsearch
@@ -24,13 +25,22 @@ elasticsearch/docker-compose-6.6.1/es2/data
 elasticsearch/docker-compose-6.6.1/es2/plugins
 elasticsearch/docker-compose-6.6.1/logstash
 
-
-
 # mongo db
 mongo/data/db
+mongo/instance
+docker/mongo/instance
 
 # nginx
-nginx/logs
+docker/nginx/instance
+nginx/instance
 
-
-
+# intellij
+.idea
+*.idea
+*.iml
+*/*.iml
+*/*/*.iml
+package-lock.json
+*~
+*/*~
+*/*/*~

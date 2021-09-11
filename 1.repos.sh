@@ -7,16 +7,16 @@ ubuntu_name=$(lsb_release -sc)
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.back
 sudo rm -R /etc/apt/sources.list.d/*
 cat > sources.list <<EOF
-deb http://mirrors.163.com/ubuntu/ ${ubuntu_name} main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ ${ubuntu_name}-security main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ ${ubuntu_name}-updates main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ ${ubuntu_name}-proposed main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ ${ubuntu_name}-backports main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ ${ubuntu_name} main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ ${ubuntu_name}-security main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ ${ubuntu_name}-updates main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ ${ubuntu_name}-proposed main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ ${ubuntu_name}-backports main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ ${ubuntu_name} main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ ${ubuntu_name}-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ ${ubuntu_name}-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ ${ubuntu_name}-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ ${ubuntu_name}-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ ${ubuntu_name} main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ ${ubuntu_name}-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ ${ubuntu_name}-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ ${ubuntu_name}-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ ${ubuntu_name}-backports main restricted universe multiverse
 EOF
 sudo cp sources.list /etc/apt/sources.list
 rm sources.list

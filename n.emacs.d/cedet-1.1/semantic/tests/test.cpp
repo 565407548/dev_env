@@ -497,7 +497,7 @@ Foobar::non_nil()
 void
 ClassWithExternals::non_nil()
 {
-  String s = "lödfjg dlfgkdlfkgjdl";
+  String s = "lï¿½dfjg dlfgkdlfkgjdl";
   return;
 }
 
