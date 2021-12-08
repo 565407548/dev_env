@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  svn-server:
+    image: elleflorio/svn-server
+    container_name: svn-server
+    restart: always
+    ports:
+      - 6000:443
+      - 3690:3690
+      - 9999:80
+    volumes:
+      - "./instance/repos/:/home/svn/"
+      - "./instance/config/:/etc/subversion/"
+      - "/etc/localtime:/etc/localtime:ro"
