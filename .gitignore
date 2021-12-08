@@ -34,6 +34,9 @@ docker/mongo/instance
 docker/nginx/instance
 nginx/instance
 
+# svn
+svn/instance
+
 # intellij
 .idea
 *.idea
