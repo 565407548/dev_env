@@ -5,8 +5,8 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - 80:80
-    volumes:
-      - ./instance/html:/usr/share/nginx/html
-      - ./instance/logs:/var/log/nginx
-#      - ./instance/conf:/etc/nginx
+      - 8080:80
+#    volumes:
+#      - ./instance/usr/share/nginx/html:/usr/share/nginx/html
+#      - ./instance/etc/nginx:/etc/nginx
+#      - ./instance/log:/var/log/nginx

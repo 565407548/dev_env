@@ -31,8 +31,7 @@ mongo/instance
 docker/mongo/instance
 
 # nginx
-docker/nginx/instance
-nginx/instance
+nginx/instance/log
 
 # svn
 svn/instance
